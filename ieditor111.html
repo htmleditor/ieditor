@@ -1,0 +1,656 @@
+<!doctype html>
+<!--(High class) -->
+<html>
+<head> 
+    <title>i editor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<style>
+div.wEditor {
+    padding:5px;height:120px;width:500px;margin:10px auto;
+    overflow-y:scroll;border:1px solid #DBDBDB;
+    font:12px/1.5 gulim;
+}
+div.wEditor p {margin:0;padding:0;}
+</style>
+
+
+
+<div style="width:600px;margin:0 auto;">
+<!-- &nbsp; -->
+<!-- ToolBar1 -->
+<SPAN id=testA style="visibility:visible">
+<img title="...more..." id="more" src="./IMG/rnd_br_down.png"/>
+</SPAN>
+<img title="Open file" id="open" src="./IMG/folder.png" /> 
+<img title="Save as" id="save" src="./IMG/save.png" /> 
+<img title="New file" id="new" src="./IMG/doc_empty.png" />
+<img  id="separator" src="./IMG/separator.png" />
+<img title="Font" id="font_openToolBar" src="./IMG/font_size.png" />  
+<img title="Bold" id="bold" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAJ42lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNC4yLjItYzA2MyA1My4zNTI2MjQsIDIwMDgvMDcvMzAtMTg6MTI6MTggICAgICAgICI+CiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iCiAgICB4bWxuczpJcHRjNHhtcENvcmU9Imh0dHA6Ly9pcHRjLm9yZy9zdGQvSXB0YzR4bXBDb3JlLzEuMC94bWxucy8iCiAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczp4bXBSaWdodHM9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9yaWdodHMvIgogICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICAgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iCiAgICB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgogICBwaG90b3Nob3A6RGF0ZUNyZWF0ZWQ9IjIwMTAtMDEtMDEiCiAgIHBob3Rvc2hvcDpDcmVkaXQ9Ind3dy5nZW50bGVmYWNlLmNvbSIKICAgcGhvdG9zaG9wOkF1dGhvcnNQb3NpdGlvbj0iQXJ0IERpcmVjdG9yIgogICBJcHRjNHhtcENvcmU6SW50ZWxsZWN0dWFsR2VucmU9InBpY3RvZ3JhbSIKICAgeG1wOk1ldGFkYXRhRGF0ZT0iMjAxMC0wMS0wM1QyMTozMjo1OSswMTowMCIKICAgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMkVBQkMyRUE3RjhERTExODIxQ0U0QjJDN0UzNkQ3MCIKICAgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMkVBQkMyRUE3RjhERTExODIxQ0U0QjJDN0UzNkQ3MCIKICAgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOkEyRUFCQzJFQTdGOERFMTE4MjFDRTRCMkM3RTM2RDcwIj4KICAgPElwdGM0eG1wQ29yZTpDcmVhdG9yQ29udGFjdEluZm8KICAgIElwdGM0eG1wQ29yZTpDaUFkckNpdHk9IlByYWd1ZSIKICAgIElwdGM0eG1wQ29yZTpDaUFkclBjb2RlPSIxNjAwMCIKICAgIElwdGM0eG1wQ29yZTpDaUFkckN0cnk9IkN6ZWNoIFJlcHVibGljIgogICAgSXB0YzR4bXBDb3JlOkNpRW1haWxXb3JrPSJrYUBnZW50bGVmYWNlLmNvbSIKICAgIElwdGM0eG1wQ29yZTpDaVVybFdvcms9Ind3dy5nZW50bGVmYWNlLmNvbSIvPgogICA8ZGM6cmlnaHRzPgogICAgPHJkZjpBbHQ+CiAgICAgPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ij5DcmVhdGl2ZSBDb21tb25zIEF0dHJpYnV0aW9uIE5vbi1Db21tZXJjaWFsIE5vIERlcml2YXRpdmVzPC9yZGY6bGk+CiAgICA8L3JkZjpBbHQ+CiAgIDwvZGM6cmlnaHRzPgogICA8ZGM6Y3JlYXRvcj4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGk+QWxleGFuZGVyIEtpc2VsZXY8L3JkZjpsaT4KICAgIDwvcmRmOlNlcT4KICAgPC9kYzpjcmVhdG9yPgogICA8ZGM6ZGVzY3JpcHRpb24+CiAgICA8cmRmOkFsdD4KICAgICA8cmRmOmxpIHhtbDpsYW5nPSJ4LWRlZmF1bHQiPlRoaXMgaXMgdGhlIGljb24gZnJvbSBHZW50bGVmYWNlLmNvbSBmcmVlIGljb25zIHNldC4gPC9yZGY6bGk+CiAgICA8L3JkZjpBbHQ+CiAg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">
+<img title="Italic" id="italic" src="./IMG/font_italic.png" /> 
+<img title="Image" id="image" src="./IMG/picture.png" /> 
+<img title="Table" id="table" src="./IMG/3x3_grid.png" /> 
+<img title="Undo" id="undo" src="./IMG/undo.png" /> 
+<img title="Redo" id="redo" src="./IMG/redo.png" />   
+<img  id="separator" src="./IMG/separator.png" />
+<img title="Text" id="text" src="./IMG/text_letter_t.png" />     
+<img title="Print" id="print" src="./IMG/print.png" />    
+<img title="About" id="info" src="./IMG/info.png" />
+</div>
+<!-- ToolBar2 -->
+<div style="width:600px;margin:0 auto;">
+<SPAN id=testB style="DISPLAY:none">
+<img title="up" id="nomore" src="./IMG/rnd_br_up.png"/>
+<img title="JustifyLeft" id="left" src="./IMG/align_left.png" />
+<img title="JustifyCenter" id="center" src="./IMG/align_center.png" />
+<img title="JustifyRight" id="right" src="./IMG/align_right.png" />
+<img title="Underline" id="underline" src="./IMG/font_underline.png"/>
+<img title="HorizontalRule" id="horizontalRule" src="./IMG/horizontal.png" />
+<img title="Insert html" id="html" src="./IMG/brackets.png" />
+</SPAN>
+
+<SPAN id=test1 style="DISPLAY: none">
+<table style="border-collapse:collapse; border:1px gray solid;">
+<tr>
+<td width=70 align=center>
+Filefinder
+</td>
+<td style="border-collapse:collapse; border:1px gray solid;">
+<input type="file" id="fileToLoad" title="filefinder"/>
+<input type="button" onclick="pasteHTML();" value="Confirm" />
+</td>
+<td style="border-collapse:collapse; border:1px gray solid;">
+<img title="Close" id="closeFolder" src="./IMG/round_delete.png" />
+</td>
+</tr>
+</table>
+</SPAN> 
+
+<SPAN id=test2 style="DISPLAY: none">
+<table style="border-collapse:collapse; border:1px gray solid;">
+<tr>
+<td width=70 align=center>
+File name
+</td>
+<td style="border-collapse:collapse; border:1px gray solid;" align="right">
+<input id="inputFileNameToSaveAs"/>.html&nbsp;&nbsp;<input type="button" onclick="showHTML();" value="Save as..." />
+</td>
+<td style="border-collapse:collapse; border:1px gray solid;">
+<img title="Close" id="closeFolder2" src="./IMG/round_delete.png" />
+</td>
+</tr>
+</table>
+</SPAN>
+
+<SPAN id=test3 style="DISPLAY: none">
+<table style="border-collapse:collapse; border:1px gray solid;">
+<tr>
+<td width=70 align=center>
+Image converter
+</td>
+<td style="border-collapse:collapse; border:1px gray solid;">
+<input type="file" id="imageToLoad" title="filefinder"/>
+<input type="button" onclick="encodeImageFileAsURL();" value="Confirm" />
+</td>
+<td style="border-collapse:collapse; border:1px gray solid;">
+<img title="Close" id="closeFolder3" src="./IMG/round_delete.png" />
+</td>
+</tr>
+</table>
+<textarea  id="textField" contenteditable="true" rows="3" cols="50">
+</textarea>
+</SPAN> 
+</div>
+
+<SPAN id=toolBar0 style="DISPLAY: none">
+<div id="toolBar" style="width:650px;margin:0 auto;">
+<table style="border-collapse:collapse; border:1px gray solid;">
+<tr>
+<td>
+<select onchange="formatDoc('fontname',this[this.selectedIndex].value);this.selectedIndex=0;">
+<option class="heading" selected>- font -</option>
+<option>Arial</option>
+<option>Arial Black</option>
+<option>Courier New</option>
+<option>Times New Roman</option>
+</select>
+<select onchange="formatDoc('fontsize',this[this.selectedIndex].value);this.selectedIndex=0;">
+<option class="heading" selected>- size -</option>
+<option value="1">Very small</option>
+<option value="2">A bit small</option>
+<option value="3">Normal</option>
+<option value="4">Medium-large</option>
+<option value="5">Big</option>
+<option value="6">Very big</option>
+<option value="7">Maximum</option>
+</select>
+<select onchange="formatDoc('forecolor',this[this.selectedIndex].value);this.selectedIndex=0;">
+<option class="heading" selected>- color -</option>
+<option value="red">Red</option>
+<option value="blue">Blue</option>
+<option value="green">Green</option>
+<option value="black">Black</option>
+</select>
+<select onchange="formatDoc('backcolor',this[this.selectedIndex].value);this.selectedIndex=0;">
+<option class="heading" selected>- background -</option>
+<option value="red">Red</option>
+<option value="green">Green</option>
+<option value="black">Black</option>
+</select>
+<select onchange="formatDoc('formatblock',this[this.selectedIndex].value);this.selectedIndex=0;">
+<option selected>- formatting -</option>
+<option value="h1">Title 1 &lt;h1&gt;</option>
+<option value="h2">Title 2 &lt;h2&gt;</option>
+<option value="h3">Title 3 &lt;h3&gt;</option>
+<option value="h4">Title 4 &lt;h4&gt;</option>
+<option value="h5">Title 5 &lt;h5&gt;</option>
+<option value="h6">Subtitle &lt;h6&gt;</option>
+<option value="p">Paragraph &lt;p&gt;</option>
+<option value="pre">Preformatted &lt;pre&gt;</option>
+</select>
+</td>
+<td>
+<img title="Close" id="font_closeToolBar" src="./IMG/round_delete.png" />
+</td>
+</tr>
+</table>
+</div>
+
+</SPAN>
+
+<div id="editorExam1" class="wEditor" contenteditable="true" style="width:700px;height:500px;margin:0 auto;">
+</div>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+///////////////////////////////////////////////////
+////////////////////////////////
+/////////////////////////////
+////////////
+///////////
+//////// -->
+<script>
+var font_open_flag = 0;//0=closed,1=opened
+var file_open_flag = 0;//0=closed,1=opened
+var save_open_flag = 0;//0=closed,1=opened
+var image_open_flag = 0;//0=closed,1=opened
+    function openFolderA() {         
+        document.getElementById('testA').style.visibility='visible'; 
+    } 
+    function closeFolderA(){ 
+        document.getElementById('testA').style.visibility='hidden';         
+    }
+    function openFolderB() {         
+        document.getElementById('testB').style.display=''; 
+    } 
+    function closeFolderB(){ 
+        document.getElementById('testB').style.display='none';         
+    }
+
+    function openFolder() {         
+        document.getElementById('test1').style.display=''; 
+    } 
+    function closeFolder(){ 
+        document.getElementById('test1').style.display='none';         
+    } 
+    function openFolder2() {        
+        document.getElementById('test2').style.display=''; 
+    } 
+    function closeFolder2(){ 
+        document.getElementById('test2').style.display='none';     
+    } 
+    function openFolder3() {        
+        document.getElementById('test3').style.display=''; 
+    } 
+    function closeFolder3(){ 
+        document.getElementById('test3').style.display='none';     
+    }
+    function openToolBar0() {        
+        document.getElementById('toolBar0').style.display=''; 
+    } 
+    function closeToolBar0(){ 
+        document.getElementById('toolBar0').style.display='none';     
+    } 
+function formatDoc(sCmd, sValue) {
+  document.execCommand(sCmd, false, sValue);
+  document.getElementById("editorExam1").focus();
+}
+
+(function() {
+    var  $ = new Function("a","return document.getElementById(a)");
+    var _editor = $("editorExam1");
+
+    // 버튼 클릭 이벤트 추가
+    $('new').onclick = function() {
+        _editor.focus();
+        document.execCommand("SelectAll");
+        document.execCommand("Delete");
+    };
+    $('bold').onclick = function() {
+        _editor.focus();
+        document.execCommand("Bold");
+    
+    };
+    $('italic').onclick = function() {
+        _editor.focus();
+        document.execCommand("Italic");
+    };
+    $('html').onclick = function() {
+        var html = prompt("Insert HTML tag < >", "");
+        _editor.focus();
+     if (html=="" || html== null) {
+
+      } else {
+        if (document.all) {
+           var range = document.selection.createRange();
+           range.pasteHTML(html);
+         } else {
+           document.execCommand('insertHTML', false, html);
+         }
+      }
+
+    };
+    $('text').onclick = function() {
+        var html = _editor.innerHTML;
+        alert(html);    
+    };
+    $('print').onclick = function() {
+      var oPrntWin = window.open("","_blank","width=450,height=470,left=400,top=100,menubar=yes,toolbar=no,location=no,scrollbars=yes");
+      oPrntWin.document.open();
+      oPrntWin.document.write("<!doctype html><html><head><title>Print<\/title><\/head><body onload=\"print();\">" + _editor.innerHTML + "<\/body><\/html>");
+      oPrntWin.document.close();   
+    };
+
+    $('image').onclick = function() {
+       
+     if (image_open_flag==0) { //image_open_flag=0; ===closed
+         openFolder3();//image
+       image_open_flag = 1;
+      } else if(image_open_flag==1) { //,image_open_flag=1; ===opened
+        closeFolder3();//image
+       image_open_flag = 0;
+      }
+    };
+    
+    $('undo').onclick = function() {
+        _editor.focus();
+        document.execCommand("Undo");
+    
+    };
+    $('redo').onclick = function() {
+        _editor.focus();
+        document.execCommand("Redo");
+    };
+
+    $('open').onclick = function() {
+                  
+      if (file_open_flag==0) { //file_open_flag=0; ===closed
+       openFolder();//file
+       file_open_flag = 1;
+      } else if(file_open_flag==1) { //,file_open_flag=1; ===opened
+       closeFolder();//file
+       file_open_flag = 0;
+      }
+
+    };
+    $('save').onclick = function() {
+       
+     if (save_open_flag==0) { //save_open_flag=0; ===closed
+        openFolder2();//saveas
+       save_open_flag = 1;
+      } else if(save_open_flag==1) { //,save_open_flag=1; ===opened
+       closeFolder2();//saveas
+       save_open_flag = 0;
+      }
+    };
+    $('closeFolder').onclick = function() {
+        closeFolder();//file
+    };
+    $('closeFolder2').onclick = function() {   
+        closeFolder2();//saveas
+    };
+    $('closeFolder3').onclick = function() {   
+        closeFolder3();//image
+    };
+    $('info').onclick = function() {   
+        info();
+    };
+$('table').onclick = function() {
+ 
+  var  rowstext = prompt("enter rows");
+  var  colstext = prompt("enter cols");
+  var  rows = parseInt(rowstext);
+  var  cols = parseInt(colstext);
+
+ var  table_start = "<table border=1 bordercolor=black cellspacing=0 >";
+
+ var  table_end = "</table>";
+
+ var  table_row_start ="<tr>";
+
+ var  table_column ="<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+
+ var  table_row_end ="</tr>";
+
+ var  table_lines="";
+
+ var  table_lines2="";
+
+ var  table_lines3="";
+if (rows == 0) {
+
+		//nothing;
+
+		
+		} else {
+if (cols== 0) {
+
+		//nothing;
+
+		 
+
+		} else {
+
+		
+
+	for (var i = 0;i < cols;i++) {
+
+		table_lines += table_column;
+
+	}//for
+
+	for(var i2 = 0 ; i2 < rows;i2++) {
+
+	 table_lines2 +=  table_row_start+table_lines+table_row_end;
+
+		}//for
+	table_lines3 = table_start+table_lines2+table_end;
+
+		}//if2
+
+		}//if1
+
+
+ var  tableData="&nbsp;"+table_lines3+"&nbsp;";
+       _editor.focus();
+         if (document.all) {
+           var range = document.selection.createRange();
+           range.pasteHTML(tableData);
+         } else {
+           document.execCommand('insertHTML', false, tableData);
+         }
+
+};
+$('more').onclick = function() {   
+     openFolderB();
+     closeFolderA();
+};
+$('nomore').onclick = function() {   
+     openFolderA();
+     closeFolderB();
+};
+$('left').onclick = function() {   
+      _editor.focus();
+        document.execCommand("JustifyLeft");
+};
+$('center').onclick = function() {   
+     _editor.focus();
+        document.execCommand("JustifyCenter");
+};
+$('right').onclick = function() {   
+     _editor.focus();
+        document.execCommand("JustifyRight");
+};
+$('underline').onclick = function() {   
+      _editor.focus();
+        document.execCommand("Underline");
+};
+$('font_openToolBar').onclick = function() { 
+      //alert(font_open_flag);
+    if (font_open_flag==0) { //font_open_flag=0; ===closed
+       openToolBar0();
+       font_open_flag = 1;
+      } else if(font_open_flag==1) { //,font_open_flag=1; ===opened
+       closeToolBar0();
+       font_open_flag = 0;
+      }
+};
+$('font_closeToolBar').onclick = function() {   
+      closeToolBar0();
+      font_open_flag =0;
+};
+
+$('horizontalRule').onclick = function() {   
+      _editor.focus();
+        
+        if (document.all) {
+           var range = document.selection.createRange();
+           range.pasteHTML("<HR>");
+         } else {
+           document.execCommand('insertHTML', false, "<HR>");
+         }
+};
+
+
+})();
+
+
+function info() {
+  alert("Nonprofit & GNUGPL,This, \"i editor\" is the open source project of html editor, www.openwebstandard.org");
+}
+
+
+</script>
+<script>
+
+function  pasteHTML() { 
+//alert('.');
+var fileToLoad = document.getElementById("fileToLoad").files[0];
+var fileReader = new FileReader();
+
+fileReader.onload = function(fileLoadedEvent){
+//alert('..');
+var textFromFileLoaded = fileLoadedEvent.target.result;
+       document.getElementById("editorExam1").focus();
+        document.execCommand("SelectAll");
+        document.execCommand("Delete");
+
+        if (document.all) {
+           var range = document.selection.createRange();
+           range.pasteHTML("&nbsp;"+textFromFileLoaded+"&nbsp;");
+         } else {
+           document.execCommand('insertHTML', false, "&nbsp;"+textFromFileLoaded+"&nbsp;");
+         }
+//alert(textFromFileLoaded);
+};
+fileReader.readAsText(fileToLoad, "UTF-8");
+closeFolder();
+}
+
+
+function showHTML() {
+//var textToWrite =document.getElementById("editorExam1").innerText;	 
+var textToWrite =document.getElementById("editorExam1").innerHTML;
+alert(textToWrite);
+var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+var blobURL = new Blob([textToWrite], {type:'text/plain'});
+//var fileParts = [ 'hello, blob' ];
+//    var blob = new Blob(fileParts, { 'type': 'text/plain' });
+//    blob.size; //--> 11
+//    blob.type; //--> "text/plain"
+//var textFileAsBlob = new Blob([textToWrite], {'type':'html/plain'});
+
+
+
+var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+var fileNameToSaveAs0 = fileNameToSaveAs+".html";
+if (fileNameToSaveAs == "") {
+//alert("input filename???");
+prompt_alert();
+var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+//alert(fileNameToSaveAs);
+
+} else {
+
+}
+
+//alert("XXX");
+//alert(fileNameToSaveAs);
+
+var downloadLink = document.createElement("a");
+
+downloadLink.download = fileNameToSaveAs+".html";
+
+downloadLink.innerHTML = "Download File";
+
+//alert(navigator.userAgent);
+// Create 'user' object that will contain Detect.js stuff
+// Call detect.parse() with navigator.userAgent as the argument
+//var user = detect.parse(navigator.userAgent);
+//alert("navigator.userAgent");
+// Display some property values in my browser's dev tools console
+//console.log(
+//  user.browser.family; //Firefox 30 Windows 7,Chrome 35 Windows 7,if (user.browser.family === 'Safari') {  alert('You\'re using the Safari browser'); }
+//  user.browser.version
+//  user.os.name
+//);
+//alert("...");
+if (window.webkitURL != null){
+
+//alert("...webkit(O)");
+// Chrome allows the link to be clicked
+
+// without actually adding it to the DOM.
+
+downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+
+downloadLink.click();
+
+//} else if(user.browser.family == 'Firefox') {
+} else {
+var str= navigator.userAgent;
+//alert(navigator.userAgent);
+if(str.search("Trident") ==-1  ){ //windows(X)=="Firefox"
+
+// Firefox requires the link to be added to the DOM
+//alert("firefox...");
+// before it can be clicked.
+
+downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+
+downloadLink.onclick = destroyClickedElement;
+downloadLink.style.display = "none";
+document.body.appendChild(downloadLink);
+
+
+downloadLink.click();
+
+} else {//windows(o)
+
+//alert("windows IE");
+//참고  다음 예에서는 Internet Explorer 10 이상이 필요합니다.
+
+//alert(textFileAsBlob.value);
+window.navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs0); // The user only has the option of clicking the Save button.
+    alert("File save request made using, Download folder");
+
+//var strFile = document.URL;
+//var strFile = window.location.href;
+//var lastIndex = strFile.lastIndexOf("/");
+//var strFileName = strFile.substring(lastIndex+1,strFile.length);
+//var strFilePath = strFile.substring(0,lastIndex+1);
+//alert(strFilePath);
+
+// var fso = new ActiveXObject("Scripting.FileSystemObject");
+//if(!fso.FileExists(fileNameToSaveAs0)){
+//var pathFile = fso.CreateTextFile(fileNameToSaveAs0,true);
+//}
+
+//var f=fso.OpenTextFile(fileNameToSaveAs0,2,true);
+//var reader = new FileReader();
+// reader.readAsDataURL(blobURL);
+//  reader.readAsText(blobURL,'UTF-8');
+//f.Write(textToWrite);
+//pathFile.WriteLine("textToWrite7777\\r\\n");
+//pathFile.WriteBlankLines(3);
+//pathFile.WriteLine("textToWrite2\n0000\n");
+//pathFile.Write("text0");
+//pathFile.WriteLine("textToWrite2\n0001\n");
+//pathFile.WriteLine("textToWrite2\n0002\n");
+//pathFile.Close();
+//reader.Colse();
+
+   //var fileNameToSaveAs0=fileNameToSaveAs+".html";
+   //fileDownload(fileNameToSaveAs0);
+   //fileDownload();
+   //alert("9999");
+   //SaveToDiskOnBlob();
+}}
+   // SaveDocument();
+   //downloadLink.click();
+   //alert("000");
+
+   closeFolder2();
+}
+
+function destroyClickedElement(event){
+document.body.removeChild(event.target);
+}
+
+function prompt_alert(){
+       /* prompt(문자열, 초기값) */
+       var name_value = prompt("file name?", "");
+       /* if(name_value == true) else false */
+       if(name_value){
+ document.getElementById("inputFileNameToSaveAs").value = name_value;
+ //alert(name_value);
+
+       } else {
+ alert("canceled");
+  }
+}
+
+function encodeImageFileAsURL(){
+
+    var filesSelected = document.getElementById("imageToLoad").files;
+    if (filesSelected.length > 0)
+    {
+        var fileToLoad = filesSelected[0];
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+            var newImage = document.createElement('img');
+            newImage.src = srcData;
+
+            alert("Converted Base64Encoding Data: "+newImage.outerHTML);
+document.getElementById("textField").focus();
+ document.getElementById("textField").innerHTML="&nbsp;"+newImage.outerHTML+"&nbsp;";
+            document.getElementById("editorExam1").focus();
+
+         if (document.all) {
+           var range = document.selection.createRange();
+           range.pasteHTML(newImage.outerHTML);
+         } else {
+           document.execCommand('insertHTML', false, "&nbsp;"+newImage.outerHTML+"&nbsp;");
+         }
+          document.getElementById("textField").innerHTML="&nbsp;"+newImage.outerHTML+"&nbsp;";
+       }
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+
+function alert001() {
+alert('99999');
+}
+
+</script>
+</body>
+</html>
